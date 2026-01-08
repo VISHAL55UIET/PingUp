@@ -1,16 +1,9 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "server/api/**/*.js",
-      "use": "@vercel/node",
-      "config": { "runtime": "nodejs18.x" }
-    }
+    { "src": "server/api/inngest.js", "use": "@vercel/node", "config": { "runtime": "nodejs18.x" } }
   ],
   "routes": [
-    {
-      "src": "/api/inngest",
-      "dest": "/server/api/inngest.js"
-    }
+    { "src": "/api/inngest", "dest": "server/api/inngest.js" }
   ]
 }
