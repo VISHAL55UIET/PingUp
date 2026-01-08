@@ -6,9 +6,9 @@
       "use": "@vercel/node",
       "config": {
         "includeFiles": [
-          "configs/**",
-          "inngest/**",
-          "models/**",
+          "server/configs/**",
+          "server/inngest/**",
+          "server/models/**",
           ".env"
         ]
       }
