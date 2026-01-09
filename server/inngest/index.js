@@ -35,8 +35,7 @@ export const syncUserCreation = inngest.createFunction(
         email: primaryEmail,
         full_name: event.data.first_name + " " + event.data.last_name,
         profile_picture: event.data.image_url,
-        username,
-        profile_picture: event.data.image_url,
+        username
       });
       console.log("User inserted in Mongo");
     } catch (err) {
@@ -62,7 +61,7 @@ export const syncUserUpdation = inngest.createFunction(
     await UserModel.findByIdAndUpdate(event.data.id, {
       email: primaryEmail,
       full_name: event.data.first_name + " " + event.data.last_name,
-      profile_picture: event.data.image_url,
+      profile_picture: event.data.image_url
     });
 
     console.log("User updated in Mongo");
@@ -84,3 +83,4 @@ export const functions = [
   syncUserUpdation,
   syncUserDeletion
 ];
+
