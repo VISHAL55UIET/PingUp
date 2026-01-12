@@ -7,7 +7,7 @@ import connectDB from "../configs/db.js"; // uncomment if not globally connected
 // create client
 export const inngest = new Inngest({ id: "pingup-app" });
 
-// sync user creation
+// sync user creation   
 const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
   { event: "clerk/user.created" },
