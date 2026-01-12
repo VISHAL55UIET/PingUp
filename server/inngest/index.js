@@ -2,12 +2,12 @@ import { Inngest } from "inngest";
 import UserModel from "../models/User.js";
 import Connection from "../models/Connections.js";
 import sendEmail from "../configs/nodeMailer.js";
-//import connectDB from "../configs/db.js"; // uncomment if not globally connected
+// import connectDB from "../configs/db.js"; // uncomment if not globally connected
 
 // create client
 export const inngest = new Inngest({ id: "pingup-app" });
 
-// sync user creation   
+// sync user creation
 const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
   { event: "clerk/user.created" },
