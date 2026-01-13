@@ -89,7 +89,7 @@ const sendNewConnectionRequestReminder = inngest.createFunction(
         <p>Thanks,<br/>PingUp - Stay Connected</p>
       </div>`;
 
-      await sendEmail({
+      await sendEmail({     
         to: connection.to_user_id.email,
         subject,
         body,

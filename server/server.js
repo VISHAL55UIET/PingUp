@@ -18,7 +18,7 @@ await connectDB();
 app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware());
-//app.get("/", (req, res) => res.send("Server is running..."))
+app.get("/", (req, res) => res.send("Server is running..."))
 
 // Inngest webhook route
 app.use("/api/inngest", serve({ client: inngest, functions }))
