@@ -2,7 +2,7 @@ import UserModel from "../models/User.js";
 import fs from "fs";
 import imageKit from "../configs/imageKit.js";
 import Connection from "../models/Connections.js";
-import Post from "../models/post.js";
+import Post from "../models/Post.js";
 import { inngest } from "../inngest/index.js";
 // ❌ REMOVED TYPO IMPORT: import { use } from "react";
 

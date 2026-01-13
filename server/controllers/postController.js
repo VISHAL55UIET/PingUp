@@ -1,6 +1,6 @@
 import fs from "fs";
 import imageKit from "../configs/imageKit.js";
-import Post from "../models/post.js";
+import Post from "../models/Post.js";
 import UserModel from "../models/User.js";
 // ❌ REMOVED TYPO IMPORT: import { create } from "domain";
 
