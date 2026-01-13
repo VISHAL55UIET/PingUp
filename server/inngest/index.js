@@ -154,44 +154,49 @@ const deleteStory =  inngest.createFunction(
 )
 
 const sendNotificationMessageOfUnseenMessage = inngest.createFunction(
+  { id: "send-unseen-message-notification" },
   {
-  id:"send-unseen-message-notification"
-},
-{cron:"TZ=America/New_york 0 9 * * *"},
-async({step})=>{
-  const messages = await Message.find({seen:false}).populate('to_user_id');
-  const unseenCount = {}
-  messages.map(message=>{
-    unseenCount[message.to_user_id._id]=(unseenCount[message.to_user_id._id] || 0 )+1;
-  })
-  for(const userId in unseenCount){
-    const user  =  await UserModel.findById(userId);
+    cron: "0 9 * * *",
+    timezone: "America/New_York",
+  },
+  async ({ step }) => {
+    const messages = await Message.find({ seen: false }).populate("to_user_id");
 
-    const  subject = `You have ${unseenCount[userId]} unseen messages`
+    const unseenCount = {};
+    messages.forEach((message) => {
+      unseenCount[message.to_user_id._id] =
+        (unseenCount[message.to_user_id._id] || 0) + 1;
+    });
 
-    const body = `
-    <div style="font-family: Arial, sans-serif; padding: 20px;">
-  <h2>Hi ${user.full_name},</h2>
-  <p>You have ${unseenCount[userId]} unseen messages</p>
-  <p>
-    Click <a href="${process.env.FRONTEND_URL}/messages" style="color: #10b981;">
-      here
-    </a> to view them
-  </p>
-  <br/>
-  <p>Thanks,<br/>PingUp - Stay Connected</p>
-</div>
+    for (const userId in unseenCount) {
+      const user = await UserModel.findById(userId);
 
-    `;
-    await sendEmail({
-      to:user.email,
-      subject,
-      body
-    })
+      const subject = `You have ${unseenCount[userId]} unseen messages`;
+
+      const body = `
+      <div style="font-family: Arial, sans-serif; padding: 20px;">
+        <h2>Hi ${user.full_name},</h2>
+        <p>You have ${unseenCount[userId]} unseen messages</p>
+        <p>
+          Click <a href="${process.env.FRONTEND_URL}/messages" style="color: #10b981;">
+            here
+          </a> to view them
+        </p>
+        <br/>
+        <p>Thanks,<br/>PingUp - Stay Connected</p>
+      </div>
+      `;
+
+      await sendEmail({
+        to: user.email,
+        subject,
+        body,
+      });
+    }
+
+    return { message: "Notification sent." };
   }
-  return {messages:"Notification sent."}
-}
-)
+);
 
 
 // export functions
